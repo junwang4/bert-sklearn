@@ -24,7 +24,7 @@ def get_model(bert_model,
               num_labels,
               model_type,
               num_mlp_layers=0,              
-              num_mlp_hiddens=500,
+              num_mlp_hiddens=500, class_weight=None,
               local_rank=-1):
     """
     Get a BertPlusMLP model and BertTokenizer.
@@ -45,11 +45,14 @@ def get_model(bert_model,
     tokenizer = BertTokenizer.from_pretrained(bert_model,do_lower_case=do_lower_case)
 
     print("Loading %s model..."%(bert_model))
+    if class_weight is not None and type(class_weight)==list:
+        class_weight = torch.tensor(class_weight).to('cuda') # in the future, update to .to(device)
+
     model = BertPlusMLP.from_pretrained(bert_model,
             cache_dir = PYTORCH_PRETRAINED_BERT_CACHE/'distributed_{}'.format(local_rank),
             num_labels = num_labels, 
             model_type = model_type,
-            num_mlp_hiddens = num_mlp_hiddens,
+            num_mlp_hiddens = num_mlp_hiddens,  class_weight=class_weight,
             num_mlp_layers = num_mlp_layers)
 
     return model, tokenizer

@@ -107,6 +107,7 @@ class BaseBertEstimator(BaseEstimator):
                 use_cuda=True,
                 random_state=42,
                 validation_fraction=0.1,
+                class_weight=None,
                 logfile='bert_sklearn.log'):
         
         
@@ -146,7 +147,7 @@ class BaseBertEstimator(BaseEstimator):
                                                   self.num_labels,
                                                   self.model_type,
                                                   self.num_mlp_layers,              
-                                                  self.num_mlp_hiddens,
+                                                  self.num_mlp_hiddens, self.class_weight,
                                                   self.local_rank)
         else:
             # restore model from restore_file      

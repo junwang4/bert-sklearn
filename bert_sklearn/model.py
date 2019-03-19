@@ -62,7 +62,7 @@ class BertPlusMLP(BertPreTrainedModel):
     def __init__(self, config, 
                  model_type="classifier",
                  num_labels=2,                  
-                 num_mlp_layers=2,
+                 num_mlp_layers=2, class_weight=[1,1],
                  num_mlp_hiddens=500):
                  
         super(BertPlusMLP, self).__init__(config)
@@ -70,6 +70,7 @@ class BertPlusMLP(BertPreTrainedModel):
         self.num_labels = num_labels        
         self.num_mlp_layers = num_mlp_layers
         self.num_mlp_hiddens = num_mlp_hiddens
+        self.class_weight = class_weight
 
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
         self.bert = BertModel(config)
@@ -92,7 +93,7 @@ class BertPlusMLP(BertPreTrainedModel):
 
         if labels is not None:
             if self.model_type=="classifier" :
-                loss_criterion = nn.CrossEntropyLoss(reduction='none')
+                loss_criterion = nn.CrossEntropyLoss(reduction='none', weight=self.class_weight)
             elif self.model_type=="regressor":
                 loss_criterion = nn.MSELoss(reduction='none')
                 output = torch.squeeze(output)
