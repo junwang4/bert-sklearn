@@ -46,7 +46,7 @@ def get_model(bert_model,
 
     print("Loading %s model..."%(bert_model))
     if class_weight is not None and type(class_weight)==list:
-        class_weight = torch.tensor(class_weight).to('cuda') # in the future, update to .to(device)
+        class_weight = torch.Tensor(class_weight).to('cuda') # in the future, update to .to(device)
 
     model = BertPlusMLP.from_pretrained(bert_model,
             cache_dir = PYTORCH_PRETRAINED_BERT_CACHE/'distributed_{}'.format(local_rank),
