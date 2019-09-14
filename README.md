@@ -1,8 +1,17 @@
+
+## to reproduce our work with the BioBERT pretrained model
+
+check the following link for how to install the pytorch version of BioBERT
+https://github.com/junwang4/bert-sklearn/releases
+
+
+
 # scikit-learn wrapper for BERT
 A scikit-learn model for text classification/regression based on the [huggingface pytorch](https://github.com/huggingface/pytorch-pretrained-BERT) port of Google's [BERT](https://github.com/google-research/bert)(Bidirectional Encoder Representations from Transformers) model.
 
 * Added an MSE loss for regression tasks
 * Added configurable MLP as final classifier/regressor
+
 
 ## basic operation
 
