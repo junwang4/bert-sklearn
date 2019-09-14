@@ -28,7 +28,7 @@ logging.basicConfig(format = '%(asctime)s - %(levelname)s - %(name)s -   %(messa
                     datefmt = '%m/%d/%Y %H:%M:%S',
                     level = logging.INFO)
 
-SUPPORTED_MODELS = ('bert-base-uncased','bert-large-uncased','bert-base-cased',
+SUPPORTED_MODELS = ('biobert-base-cased', 'bert-base-uncased','bert-large-uncased','bert-base-cased',
                     'bert-large-cased','bert-base-multilingual-uncased',
                     'bert-base-multilingual-cased', 'bert-base-chinese')
 
